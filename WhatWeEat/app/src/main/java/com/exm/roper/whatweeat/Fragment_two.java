@@ -120,6 +120,7 @@ public class Fragment_two extends Fragment {
                 System.out.println (matcher.group (1));
                 user_bean.setUsername (matcher.group (1));
                 System.out.println (matcher.group (2));
+                user_bean.setUserid (matcher.group (2));
                 System.out.println (matcher.group (3));
             }
         }

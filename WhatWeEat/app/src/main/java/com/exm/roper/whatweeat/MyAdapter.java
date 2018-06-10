@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 class MyAdapter extends RecyclerView.Adapter {
 
+    private OnItemClickListener mOnItemClickListener;
     //数据
     private ArrayList<MainFragment_recy_data> itemList;
     //        private ImageResizer imgResizer = new ImageResizer();
@@ -23,6 +24,15 @@ class MyAdapter extends RecyclerView.Adapter {
         this.itemList = itemList;
     }
 
+
+    public interface OnItemClickListener{
+        void onClick( String data);
+//        void onLongClick( String data);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener ){
+        this.mOnItemClickListener=onItemClickListener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,9 +45,8 @@ class MyAdapter extends RecyclerView.Adapter {
 
     //绑定数据
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MainFragment_recy_data it = itemList.get(position);
-
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        final MainFragment_recy_data it = itemList.get(position);
         mViewHolder mholder = (mViewHolder)holder;
         //设置imageView的图片
         mholder.iv_item_img.setImageBitmap (it.getImg());
@@ -45,6 +54,22 @@ class MyAdapter extends RecyclerView.Adapter {
         //设置textView的文字
         mholder.tv_item_desc.setText(it.getRes_name());
         mholder.tv_item_body.setText (it.getRes_location());
+
+        if (mOnItemClickListener !=null){
+            holder.itemView.setOnClickListener (new View.OnClickListener (){
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onClick (it.getRes_location ());
+                }
+            });
+//            长按的方法，有问题所以先禁用
+//            holder.itemView.setOnClickListener (new View.OnClickListener ( ) {
+//                @Override
+//                public void onClick(View view) {
+//                    mOnItemClickListener.onLongClick (it.getRes_location ());
+//                }
+//            });
+        }
     }
 
 

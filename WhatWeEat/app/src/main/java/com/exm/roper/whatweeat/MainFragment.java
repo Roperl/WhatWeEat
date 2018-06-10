@@ -1,6 +1,7 @@
 package com.exm.roper.whatweeat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class MainFragment extends Fragment implements OnBannerListener {
     private RecyclerView recyclerView;
     private ArrayList<MainFragment_recy_data> itemList;
 
+
     public MainFragment() {
 
     }
@@ -67,6 +69,19 @@ public class MainFragment extends Fragment implements OnBannerListener {
         recyclerView.setLayoutManager (new LinearLayoutManager (getActivity ( )));
         final MyAdapter myAdapter = new MyAdapter ( );
         myAdapter.setData (itemList);
+        myAdapter.setOnItemClickListener (new MyAdapter.OnItemClickListener ( ) {
+            @Override
+            public void onClick(String data) {
+                Intent intent=new Intent (getActivity (),Res_detail_Activity.class);
+                intent.putExtra ("res_name",data);
+                startActivity (intent);
+                System.out.println(data);
+            }
+//            @Override
+//            public void onLongClick(String data) {
+//                Toast.makeText(getActivity (),"您长按点击了"+data+"行",Toast.LENGTH_SHORT).show();
+//            }
+        });
         recyclerView.setAdapter (myAdapter);
 
         try {
@@ -235,4 +250,5 @@ public class MainFragment extends Fragment implements OnBannerListener {
             return result;
         }
     }
+
 }

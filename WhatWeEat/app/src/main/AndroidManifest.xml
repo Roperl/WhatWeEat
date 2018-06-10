@@ -18,7 +18,9 @@
         <activity android:name=".Fragment_two_Login"></activity>
         <activity android:name=".Fragment_tow_UserPreferSeting"></activity>
         <activity android:name=".Fragment_two_userinfo"></activity>
+        <activity android:name=".Res_detail_Activity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 </manifest>
